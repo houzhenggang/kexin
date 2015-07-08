@@ -9,16 +9,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 public class TokenManager {
-    private Map<String, User> tokenMap = new ConcurrentHashMap<String, User>();
+    private Map<String, Integer> tokenMap = new ConcurrentHashMap<String, Integer>();
 
-    public User checkToken(String token) {
+    public Integer checkToken(String token) {
         return tokenMap.get(token);
     }
 
-    public String addToken(User user) {
+    public String generateToken(User user) {
         UUID uuid = UUID.randomUUID();
         String token = uuid.toString();
-        tokenMap.put(token, user);
+        tokenMap.put(token, user.getUserId());
         return token;
     }
 }

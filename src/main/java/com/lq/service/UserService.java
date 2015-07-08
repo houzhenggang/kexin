@@ -23,15 +23,15 @@ public class UserService {
         return 1;
     }
 
-    public int userValidation(String username, String password) {
+    public User userValidation(String username, String password) {
         User u = userDao.selectUserByName(username);
         if (u == null) {
-            return -1; //用户名不存在
+            return null; //用户名不存在
         }
         if (!u.getPassword().equals(password)) {
-            return -2; //密码错误
+            return null; //密码错误
         }
-        return 1;
+        return u;
     }
 
     public User getUserByName(String username) {

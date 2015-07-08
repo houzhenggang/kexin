@@ -2,18 +2,24 @@ package com.lq.controller;
 
 import com.lq.entity.User;
 import com.lq.service.UserService;
+import com.lq.util.TokenManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/user")
 public class LoginController {
     @Resource
     private UserService userService;
+
+    @Resource
+    private TokenManager tokenManager;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
@@ -22,18 +28,22 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(ModelMap model, String user_name, String password) {
+    public String login(ModelMap model, String user_name, String password, HttpServletResponse response) {
 
-        int result = userService.userValidation(user_name, password);
-        if (result == -1) {
-            model.addAttribute("errorMessage", "无此用户！");
-            return "User/Login";
-        } else if (result == -2) {
-            model.addAttribute("errorMessage", "密码错误！");
+        User user = userService.userValidation(user_name, password);
+        if (user == null) {
+            model.addAttribute("errorMessage", "用户名或密码错误！");
             return "User/Login";
         }
-        User user = userService.getUserByName(user_name);
+
         model.addAttribute("user", user);
+        //cookie生成和写入
+        String token = tokenManager.generateToken(user);
+        Cookie cookie = new Cookie("token", token);
+        cookie.setMaxAge(-1);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
         return "User/LoginSuccess";
     }
 
@@ -63,5 +73,13 @@ public class LoginController {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    public TokenManager getTokenManager() {
+        return tokenManager;
+    }
+
+    public void setTokenManager(TokenManager tokenManager) {
+        this.tokenManager = tokenManager;
     }
 }

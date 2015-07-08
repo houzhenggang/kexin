@@ -23,4 +23,12 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/*"/>
+            <bean class="com.lq.controller.LoginVerificationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
