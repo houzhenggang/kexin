@@ -1,8 +1,8 @@
-package com.lq.controller;
+package com.lq.kexin.controller;
 
-import com.lq.entity.User;
-import com.lq.service.UserService;
-import com.lq.util.TokenManager;
+import com.lq.kexin.entity.User;
+import com.lq.kexin.service.UserService;
+import com.lq.kexin.util.TokenManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;

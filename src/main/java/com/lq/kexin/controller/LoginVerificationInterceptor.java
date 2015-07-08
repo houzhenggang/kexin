@@ -1,7 +1,6 @@
-package com.lq.controller;
+package com.lq.kexin.controller;
 
-import com.lq.util.TokenManager;
-import com.sun.org.apache.xpath.internal.SourceTree;
+import com.lq.kexin.util.TokenManager;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.annotation.Resource;

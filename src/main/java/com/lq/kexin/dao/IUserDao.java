@@ -1,6 +1,6 @@
-package com.lq.dao;
+package com.lq.kexin.dao;
 
-import com.lq.entity.User;
+import com.lq.kexin.entity.User;
 
 
 public interface IUserDao {

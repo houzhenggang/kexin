@@ -1,7 +1,7 @@
-package com.lq.service;
+package com.lq.kexin.service;
 
-import com.lq.dao.IUserDao;
-import com.lq.entity.User;
+import com.lq.kexin.dao.IUserDao;
+import com.lq.kexin.entity.User;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

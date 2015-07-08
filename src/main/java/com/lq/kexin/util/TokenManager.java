@@ -1,6 +1,6 @@
-package com.lq.util;
+package com.lq.kexin.util;
 
-import com.lq.entity.User;
+import com.lq.kexin.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

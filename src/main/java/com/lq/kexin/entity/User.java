@@ -1,4 +1,4 @@
-package com.lq.entity;
+package com.lq.kexin.entity;
 
 @SuppressWarnings("unused")
 public class User {
