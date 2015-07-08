@@ -1,6 +1,7 @@
 package com.lq.controller;
 
 import com.lq.util.TokenManager;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.annotation.Resource;
@@ -18,18 +19,20 @@ public class LoginVerificationInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")) {
-                String token = cookie.getName();
-                int userId = tokenManager.checkToken(token);
-                if (userId == -1) {
-                    response.sendRedirect("/user/login");
-                    return false;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+                    int userId = tokenManager.checkToken(token);
+                    if (userId == -1) {
+                        break;
+                    }
+                    request.getSession().setAttribute("user_id", userId);
+                    return true;
                 }
-                request.setAttribute("user_id", userId);
-                return true;
             }
         }
+        response.sendRedirect("/kexin/user/login");
         return false;
     }
 

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/user")
-public class LoginController {
+public class UserController {
     @Resource
     private UserService userService;
 
@@ -29,6 +29,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(ModelMap model, String user_name, String password, HttpServletResponse response) {
+
 
         User user = userService.userValidation(user_name, password);
         if (user == null) {
