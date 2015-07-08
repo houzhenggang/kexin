@@ -21,12 +21,12 @@ public class LoginVerificationInterceptor extends HandlerInterceptorAdapter {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("token")) {
                 String token = cookie.getName();
-                Integer userId = tokenManager.checkToken(token);
-                if(userId == null){
+                int userId = tokenManager.checkToken(token);
+                if (userId == -1) {
                     response.sendRedirect("/user/login");
                     return false;
                 }
-                request.setAttribute("user_id",userId);
+                request.setAttribute("user_id", userId);
                 return true;
             }
         }
