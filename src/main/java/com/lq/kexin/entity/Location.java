@@ -7,6 +7,16 @@ public class Location {
     double longitude;
     double latitude;
 
+    public Location(int userId, String time, double longitude, double latitude) {
+        this.userId = userId;
+        this.time = time;
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
+
+    public Location() {
+    }
+
     public double getLatitude() {
         return latitude;
     }

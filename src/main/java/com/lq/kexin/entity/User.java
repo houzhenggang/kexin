@@ -1,6 +1,5 @@
 package com.lq.kexin.entity;
 
-@SuppressWarnings("unused")
 public class User {
 
     private int userId;
@@ -8,6 +7,18 @@ public class User {
     private String password;
     private String email;
     private String phoneNumber;
+
+
+    public User(int userId, String name, String password, String email, String phoneNumber) {
+        this.userId = userId;
+        this.name = name;
+        this.password = password;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public User() {
+    }
 
     public int getUserId() {
         return userId;
