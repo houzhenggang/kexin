@@ -19,16 +19,24 @@ public class LocationController {
 
 
     @RequestMapping(value = "/upload")
+    @ResponseBody
     public String uploadLocation(@RequestBody Location location) {
         System.out.println(location);
-        locationService.saveLocation(location);
-        return "Location/UploadSuccess";
+        if (locationService.saveLocation(location) == 0) return "UploadFail";
+        return "UploadSuccess";
     }
 
     @RequestMapping(value = "/list/{userId}")
     @ResponseBody
     public List<Location> selectLocationsByUserID(@PathVariable int userId) {
         return locationService.selectLocationsByUserID(userId);
+    }
+
+    @RequestMapping(value = "/count/{userId}")
+    @ResponseBody
+    public String countUserLocation(@PathVariable int userId) {
+        return String.valueOf(locationService.countUserLocation(userId));
+
     }
 
 

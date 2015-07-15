@@ -12,4 +12,10 @@
         FROM location
         WHERE user_id = #{userId}
     </select>
+
+    <select id="countUserLocation" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM location
+        WHERE user_id = #{userId}
+    </select>
 </mapper>
