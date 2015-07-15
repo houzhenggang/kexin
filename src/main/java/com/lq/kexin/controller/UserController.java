@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -26,26 +27,39 @@ public class UserController {
         return "User/Login";
     }
 
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html")
+    public String loginHTML(ModelMap model, String user_name, String password, HttpServletResponse response) {
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(ModelMap model, String user_name, String password, HttpServletResponse response) {
+        if (!handleLogin(model, user_name, password, response)) return "User/Login";
+        return "User/LoginSuccess";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "!text/html")
+    @ResponseBody
+    public String loginOther(ModelMap model, String user_name, String password, HttpServletResponse response) {
+
+        if (!handleLogin(model, user_name, password, response)) return "LoginFail";
+        int userId = ((User) model.get("user")).getUserId();
+        return "LoginSuccess:" + userId;
+    }
 
 
+    private boolean handleLogin(ModelMap model, String user_name, String password, HttpServletResponse response) {
         User user = userService.userValidation(user_name, password);
         if (user == null) {
             model.addAttribute("errorMessage", "用户名或密码错误！");
-            return "User/Login";
+            return false;
         }
 
         model.addAttribute("user", user);
+
         //cookie生成和写入
         String token = tokenManager.generateToken(user);
         Cookie cookie = new Cookie("token", token);
         cookie.setMaxAge(-1);
         cookie.setPath("/");
         response.addCookie(cookie);
-
-        return "User/LoginSuccess";
+        return true;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -53,18 +67,26 @@ public class UserController {
         return "User/Register";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(User user, String re_password, ModelMap model) {
-        if (!re_password.equals(user.getPassword())) {
-            model.addAttribute("errorMessage", "密码不一致!");
-            return "User/Register";
-        }
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "text/html")
+    public String registerHTML(User user, ModelMap model) {
+
         int result = userService.userRegister(user);
         if (result == -1) {
             model.addAttribute("errorMessage", "用户已注册!");
             return "User/Register";
         }
         return "User/RegisterSuccess";
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = "!text/html")
+    @ResponseBody
+    public String registerOther(User user) {
+
+        int result = userService.userRegister(user);
+        if (result == -1) {
+            return "RegisterFail:UserNameHasExisted";
+        }
+        return "RegisterSuccess";
     }
 
 

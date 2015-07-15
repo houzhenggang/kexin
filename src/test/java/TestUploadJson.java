@@ -24,11 +24,8 @@ public class TestUploadJson {
                 .build();
         try {
             login(httpclient, cookieStore);
-
-            getLocationList(httpclient, cookieStore);
-
-            //     LocationUpload(httpclient, cookieStore);
-
+//            getLocationList(httpclient, cookieStore);
+//            LocationUpload(httpclient, cookieStore);
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -72,6 +69,7 @@ public class TestUploadJson {
                 .setUri(new URI("http://localhost:8080/kexin/user/login"))
                 .addParameter("user_name", "lq")
                 .addParameter("password", "123456")
+                .addHeader("Accept", "text/plain")
                 .build();
         CloseableHttpResponse response = httpclient.execute(login);
         try {

@@ -17,7 +17,7 @@
         <mybatis.version>3.3.0</mybatis.version>
         <mybatis-spring.version>1.2.3</mybatis-spring.version>
 
-        <tomcat-jdbc.version>8.0.23</tomcat-jdbc.version>
+        <tomcat-jdbc.version>8.0.24</tomcat-jdbc.version>
         <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
         <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
         <jdbc.driver.version>5.1.35</jdbc.driver.version>
