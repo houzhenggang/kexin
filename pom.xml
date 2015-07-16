@@ -9,6 +9,13 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <properties>
+
+        <!-- Generic properties -->
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+
         <springframework.version>4.1.6.RELEASE</springframework.version>
         <slf4j.version>1.7.12</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
@@ -16,11 +23,17 @@
         <jackson.version>2.5.4</jackson.version>
         <mybatis.version>3.3.0</mybatis.version>
         <mybatis-spring.version>1.2.3</mybatis-spring.version>
+        <aspectj.version>1.8.6</aspectj.version>
+        <junit.version>4.12</junit.version>
+        <httpclient.version>4.5</httpclient.version>
 
         <tomcat-jdbc.version>8.0.24</tomcat-jdbc.version>
         <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
         <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
         <jdbc.driver.version>5.1.35</jdbc.driver.version>
+
+        <jstl.version>1.2</jstl.version>
+        <servlet-api.version>2.5</servlet-api.version>
     </properties>
 
     <dependencies>
@@ -114,24 +127,38 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>${junit.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
+            <version>${jstl.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
+            <version>${servlet-api.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.5</version>
+            <version>${httpclient.version}</version>
         </dependency>
+
+        <!--&lt;!&ndash; AspectJ dependencies &ndash;&gt;-->
+        <!--<dependency>-->
+        <!--<groupId>org.aspectj</groupId>-->
+        <!--<artifactId>aspectjrt</artifactId>-->
+        <!--<version>${aspectj.version}</version>-->
+        <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+        <!--<groupId>org.aspectj</groupId>-->
+        <!--<artifactId>aspectjtools</artifactId>-->
+        <!--<version>${aspectj.version}</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 
