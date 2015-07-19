@@ -5,17 +5,19 @@
 <generatorConfiguration>
 
     <!-- Class Driver Path -->
-    <classPathEntry location=""/>
+    <classPathEntry
+            location="C:\Users\lq\.m2\repository\mysql\mysql-connector-java\5.1.35\mysql-connector-java-5.1.35.jar"/>
 
-    <context id="context" targetRuntime="MyBatis3">
+    <context id="MYSQL_tables" targetRuntime="MyBatis3" defaultModelType="flat">
         <commentGenerator>
             <!-- This property is used to specify whether MBG will include any coments in the generated code -->
-            <property name="suppressAllComments" value="false"/>
+            <property name="suppressAllComments" value="true"/>
             <!-- This property is used to specify whether MBG will include the generation timestamp in the generated comments -->
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="" connectionURL="" userId="" password=""/>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://10.60.150.128:3306/kexin"
+                        userId="root" password="123456"/>
 
         <javaTypeResolver>
             <!-- This property is used to specify whether MyBatis Generator should force the use of java.math.BigDecimal
@@ -23,7 +25,8 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <javaModelGenerator targetPackage="com.lq.kexin.mybatis_generator.model"
+                            targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->
             <property name="enableSubPackages" value="false"/>
@@ -31,19 +34,26 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <sqlMapGenerator targetPackage="com.lq.kexin.mybatis_generator.mapper"
+                         targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.lq.kexin.mybatis_generator.dao"
+                             targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED"
+                             type="XMLMAPPER">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <table tableName="" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+        <table tableName="users" enableCountByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <generatedKey column="user_id" sqlStatement="Mysql"/>
+        </table>
+
     </context>
 </generatorConfiguration>

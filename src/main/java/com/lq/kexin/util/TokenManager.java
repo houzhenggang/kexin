@@ -30,6 +30,12 @@ public class TokenManager {
         }, 600000, 600000);//每10分清除过期的token
     }
 
+    /**
+     *
+     * @param s token
+     * @return userid,-1表示无此token或已过期
+     */
+
     public static int checkToken(String s) {
         Token token = tokenMap.get(s);
         if (token == null) {
