@@ -18,4 +18,10 @@
         FROM location
         WHERE user_id = #{userId}
     </select>
+    <select id="selectLocationByUserIDandDate" resultType="com.lq.kexin.entity.Location">
+        SELECT *
+        FROM location
+        WHERE user_id = #{userId} AND date(time) = date(#{date})
+
+    </select>
 </mapper>

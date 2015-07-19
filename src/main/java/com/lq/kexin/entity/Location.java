@@ -1,13 +1,15 @@
 package com.lq.kexin.entity;
 
+import java.sql.Timestamp;
+
 public class Location {
 
     int userId;
-    String time;
+    Timestamp time;
     double longitude;
     double latitude;
 
-    public Location(int userId, String time, double longitude, double latitude) {
+    public Location(int userId, Timestamp time, double longitude, double latitude) {
         this.userId = userId;
         this.time = time;
         this.longitude = longitude;
@@ -15,6 +17,14 @@ public class Location {
     }
 
     public Location() {
+    }
+
+    public Timestamp getTime() {
+        return time;
+    }
+
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 
     public double getLatitude() {
@@ -33,13 +43,6 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public int getUserId() {
         return userId;

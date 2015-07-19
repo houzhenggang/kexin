@@ -14,6 +14,8 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TestClient {
@@ -88,7 +90,8 @@ public class TestClient {
     }
 
     private static void LocationUpload(CloseableHttpClient httpclient, BasicCookieStore cookieStore) throws URISyntaxException, IOException {
-        Location location = new Location(1, "2015-06-04 14;25;14", 123.5, 45.5);
+        LocalDateTime time = LocalDateTime.of(2015, 7, 8, 14, 12);
+        Location location = new Location(1, Timestamp.valueOf(time), 123.5, 45.5);
         ObjectMapper objectMapper = new ObjectMapper();
 
         HttpPost post = new HttpPost(localURL + "/location/upload");

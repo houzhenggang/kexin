@@ -6,6 +6,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -31,6 +32,10 @@ public class LocationService {
 
     public int countUserLocation(int userId) {
         return locationDao.countUserLocation(userId);
+    }
+
+    public List<Location> selectLocationByUserIDandDate(int userId, Timestamp date) {
+        return locationDao.selectLocationByUserIDandDate(userId, date);
     }
 
     public ILocationDao getLocationDao() {
