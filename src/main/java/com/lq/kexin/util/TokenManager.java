@@ -20,6 +20,7 @@ public class TokenManager {
         new Timer(true).schedule(new TimerTask() {
             @Override
             public void run() {
+                System.out.println(tokenMap);
                 for (Map.Entry<String, Token> entry : tokenMap.entrySet()) {
                     if (entry.getValue().isExpire()) {
                         tokenMap.remove(entry.getKey());
@@ -71,5 +72,13 @@ class Token {
 
     public int getUserId() {
         return userId;
+    }
+
+    @Override
+    public String toString() {
+        return "Token{" +
+                "userId=" + userId +
+                ", expiredTime=" + expiredTime +
+                '}';
     }
 }
