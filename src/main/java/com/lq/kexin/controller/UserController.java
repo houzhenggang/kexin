@@ -19,9 +19,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @Resource
-    private TokenManager tokenManager;
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
         return "User/Login";
@@ -30,7 +27,7 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html")
     public String loginHTML(ModelMap model, String user_name, String password, HttpServletResponse response) {
 
-        if (!handleLogin(model, user_name, password, response)) return "User/Login";
+        if (handleLogin(model, user_name, password, response)) return "User/Login";
         return "User/LoginSuccess";
     }
 
@@ -54,7 +51,7 @@ public class UserController {
         model.addAttribute("user", user);
 
         //cookie生成和写入
-        String token = tokenManager.generateToken(user);
+        String token = TokenManager.generateToken(user);
         Cookie cookie = new Cookie("token", token);
         cookie.setMaxAge(-1);
         cookie.setPath("/");
@@ -98,11 +95,4 @@ public class UserController {
         this.userService = userService;
     }
 
-    public TokenManager getTokenManager() {
-        return tokenManager;
-    }
-
-    public void setTokenManager(TokenManager tokenManager) {
-        this.tokenManager = tokenManager;
-    }
 }

@@ -1,7 +1,6 @@
 package com.lq.kexin.util;
 
 import com.lq.kexin.entity.User;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -10,15 +9,14 @@ import java.util.TimerTask;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component
-
-//由spring保证单例
 public class TokenManager {
 
-    private static final int TOKEN_LIVE_HOURS = 3;
-    private Map<String, Token> tokenMap = new ConcurrentHashMap<String, Token>();
+    private TokenManager() {
+    }
 
-    public TokenManager() {
+    private static final Map<String, Token> tokenMap = new ConcurrentHashMap<String, Token>();
+
+    static {
         new Timer(true).schedule(new TimerTask() {
             @Override
             public void run() {
@@ -31,8 +29,7 @@ public class TokenManager {
         }, 600000, 600000);//每10分清除过期的token
     }
 
-
-    public int checkToken(String s) {
+    public static int checkToken(String s) {
         Token token = tokenMap.get(s);
         if (token == null) {
             return -1; //无此token
@@ -42,31 +39,37 @@ public class TokenManager {
             return -1;
         }
         token.update();//更新token过期时间
-        return token.userId;
+        return token.getUserId();
     }
 
-    public String generateToken(User user) {
+    public static String generateToken(User user) {
         UUID uuid = UUID.randomUUID();
         String s = uuid.toString();
         tokenMap.put(s, new Token(user.getUserId()));
         return s;
     }
+}
 
-    class Token {
-        public int userId;
-        public LocalDateTime expiredTime;
+class Token {
+    private static final int TOKEN_LIVE_HOURS = 3;
 
-        public Token(int userId) {
-            this.userId = userId;
-            this.expiredTime = LocalDateTime.now().plusHours(TOKEN_LIVE_HOURS);
-        }
+    private final int userId;
+    private LocalDateTime expiredTime;
 
-        public void update() {
-            expiredTime = LocalDateTime.now().plusHours(TOKEN_LIVE_HOURS);
-        }
+    public Token(int userId) {
+        this.userId = userId;
+        this.expiredTime = LocalDateTime.now().plusHours(TOKEN_LIVE_HOURS);
+    }
 
-        public boolean isExpire() {
-            return expiredTime.isBefore(LocalDateTime.now());
-        }
+    public void update() {
+        expiredTime = LocalDateTime.now().plusHours(TOKEN_LIVE_HOURS);
+    }
+
+    public boolean isExpire() {
+        return expiredTime.isBefore(LocalDateTime.now());
+    }
+
+    public int getUserId() {
+        return userId;
     }
 }

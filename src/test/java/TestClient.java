@@ -16,7 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
-public class TestUploadJson {
+public class TestClient {
 
 
     public static final String localURL = "http://localhost:8080/kexin";
