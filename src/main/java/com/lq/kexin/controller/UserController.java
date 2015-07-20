@@ -27,8 +27,9 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html")
     public String loginHTML(ModelMap model, String user_name, String password, HttpServletResponse response) {
 
-        if (handleLogin(model, user_name, password, response)) return "User/Login";
-        return "User/LoginSuccess";
+        if (handleLogin(model, user_name, password, response)) return "User/LoginSuccess";
+        return "User/Login";
+
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "!text/html")
@@ -86,7 +87,6 @@ public class UserController {
         return "RegisterSuccess";
     }
 
-
     public UserService getUserService() {
         return userService;
     }
@@ -94,5 +94,4 @@ public class UserController {
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
-
 }

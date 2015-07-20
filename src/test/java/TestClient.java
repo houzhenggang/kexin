@@ -21,8 +21,8 @@ import java.util.List;
 public class TestClient {
 
 
-    public static final String localURL = "http://localhost:8080/kexin";
-    public static final String remoteURL = "http://10.60.150.128:8080/kexin";
+    private static final String localURL = "http://localhost:8080/kexin";
+    private static final String remoteURL = "http://10.60.150.128:8080/kexin";
 
     public static void main(String[] args) {
         BasicCookieStore cookieStore = new BasicCookieStore();
@@ -31,7 +31,7 @@ public class TestClient {
                 .build();
         try {
             login(httpclient, cookieStore);
-//            getLocationList(httpclient, cookieStore);
+            getLocationList(httpclient, cookieStore);
             LocationUpload(httpclient, cookieStore);
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class TestClient {
 
             List<Location> locations = objectMapper.readValue(EntityUtils.toString(entity), new TypeReference<List<Location>>() {
             });
-
+            System.out.println(locations);
             showCookies(cookieStore);
         } finally {
             locationListResponse.close();
@@ -79,17 +79,14 @@ public class TestClient {
         CloseableHttpResponse response = httpclient.execute(login);
         try {
             HttpEntity entity = response.getEntity();
-
             System.out.println(EntityUtils.toString(entity));
-
-            System.out.println("Post logon cookies:");
             showCookies(cookieStore);
         } finally {
             response.close();
         }
     }
 
-    private static void LocationUpload(CloseableHttpClient httpclient, BasicCookieStore cookieStore) throws URISyntaxException, IOException {
+    private static void LocationUpload(CloseableHttpClient httpclient, BasicCookieStore cookieStore) throws IOException {
         LocalDateTime time = LocalDateTime.of(2015, 7, 8, 14, 12);
         Location location = new Location(1, Timestamp.valueOf(time), 123.5, 45.5);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -102,10 +99,8 @@ public class TestClient {
         CloseableHttpResponse response = httpclient.execute(post);
         try {
             HttpEntity entity = response.getEntity();
-            System.out.println("Login form get: " + response.getStatusLine());
             System.out.println(EntityUtils.toString(entity));
 
-            System.out.println("Post logon cookies:");
             showCookies(cookieStore);
         } finally {
             response.close();
@@ -117,8 +112,8 @@ public class TestClient {
         if (cookies.isEmpty()) {
             System.out.println("None");
         } else {
-            for (Cookie cooky : cookies) {
-                System.out.println("- " + cooky.toString());
+            for (Cookie cookie : cookies) {
+                System.out.println("- " + cookie.toString());
             }
         }
     }
@@ -135,11 +130,7 @@ public class TestClient {
         CloseableHttpResponse response = httpclient.execute(login);
         try {
             HttpEntity entity = response.getEntity();
-
-            System.out.println("Login form get: " + response.getStatusLine());
             System.out.println(EntityUtils.toString(entity));
-
-            System.out.println("Post logon cookies:");
             showCookies(cookieStore);
         } finally {
             response.close();
