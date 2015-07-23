@@ -11,4 +11,6 @@ public interface IFileDao {
 
     int updateByPrimaryKeyWithBLOBs(File record);
 
+    File selectByFileName(String name);
+
 }

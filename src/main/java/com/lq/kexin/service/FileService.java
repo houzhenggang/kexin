@@ -16,6 +16,10 @@ public class FileService {
         return fileDao.insert(file);
     }
 
+    public File getFile(String name) {
+        return fileDao.selectByFileName(name);
+    }
+
     public IFileDao getFileDao() {
         return fileDao;
     }
