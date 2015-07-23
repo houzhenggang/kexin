@@ -5,12 +5,11 @@
     <title>文件上传</title>
 </head>
 <body>
-${errorMessage}
-<h1>Please upload a file</h1>
+<h1>文件上传</h1>
 
 <form method="post" action="upload" enctype="multipart/form-data">
-    <input type="text" name="name"/>
-    <input type="file" name="file"/>
+    文件名：<input type="text" name="name"/><br>
+    <input type="file" name="file"/><br>
     <input type="submit"/>
 </form>
 </body>

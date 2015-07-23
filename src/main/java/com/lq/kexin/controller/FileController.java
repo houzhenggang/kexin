@@ -42,16 +42,19 @@ public class FileController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
+
         return "file/upload";
     }
 
     @RequestMapping(value = "/download/{fileName:.+}", method = RequestMethod.GET)
-    public HttpEntity<byte[]> downloadFile(
-            @PathVariable("fileName") String fileName) throws IOException {
-
-        byte[] documentBody = fileService.getFile(fileName).getContent();
+    public HttpEntity<byte[]> downloadFile(@PathVariable("fileName") String fileName) {
+        File file = fileService.getFile(fileName);
+        byte[] documentBody;
+        if (file == null) {
+            documentBody = new byte[]{};
+        } else
+            documentBody = file.getContent();
 
         HttpHeaders header = new HttpHeaders();
         header.setContentType(new MediaType("text", "plain"));

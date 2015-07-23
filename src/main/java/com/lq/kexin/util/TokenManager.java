@@ -20,6 +20,7 @@ public class TokenManager {
         new Timer(true).schedule(new TimerTask() {
             @Override
             public void run() {
+                System.out.println("目前所有的token：");
                 System.out.println(tokenMap);
                 for (Map.Entry<String, Token> entry : tokenMap.entrySet()) {
                     if (entry.getValue().isExpire()) {
