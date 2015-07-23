@@ -1,5 +1,7 @@
 package com.lq.kexin.service;
 
+import com.lq.kexin.dao.IFileDao;
+import com.lq.kexin.entity.File;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,7 +12,9 @@ public class FileService {
     @Resource
     private IFileDao fileDao;
 
-    public saveFile()
+    public int saveFile(File file) {
+        return fileDao.insert(file);
+    }
 
     public IFileDao getFileDao() {
         return fileDao;
