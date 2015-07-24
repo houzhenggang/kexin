@@ -1,6 +1,7 @@
 package com.lq.kexin.util;
 
-import com.lq.kexin.entity.User;
+import com.lq.kexin_ca.entity.User;
+import com.lq.kexin_ca.util.TokenManager;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;

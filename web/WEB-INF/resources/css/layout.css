@@ -1,0 +1,99 @@
+body {
+    font-family: '微软雅黑', Arial, Helvetica, sans-serif;
+}
+
+#container {
+    width: 1300px;
+    margin: 0 auto;
+}
+
+#head {
+    height: 90px;
+}
+
+#footer {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-top: 1px solid #BBBBBB;
+    padding-top: 20px;
+    margin: 200px 0 0 0;
+    height: 100px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #9B9B9B;
+    text-align: center;
+
+}
+
+#footer a {
+    color: #9B9B9B;
+}
+
+#footer a:hover {
+    text-decoration: none;
+}
+
+.z-box {
+    width: 100%;
+}
+
+.z-box-title {
+    height: 50px;
+}
+
+.z-desc {
+    display: block;
+    padding: 0 20px 0 20px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    float: left;
+    background-color: #295496;
+}
+
+.z-sub-desc {
+    display: block;
+    float: left;
+    padding-left: 15px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.z-box-content {
+    border: 2px solid #295496;
+    padding: 10px;
+
+    overflow: hidden;
+
+    /* Gecko browsers */
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+
+    /* Webkit browsers */
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+
+    /* W3C syntax */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.wnews {
+    font-size: 25px;
+    color: rgb(87, 115, 142);
+}
+
+.wnews ul li {
+    display: block;
+    height: 40px;
+}
+
+#fourpartyMonitor {
+
+}

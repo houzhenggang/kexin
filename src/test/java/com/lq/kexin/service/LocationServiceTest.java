@@ -1,6 +1,7 @@
 package com.lq.kexin.service;
 
-import com.lq.kexin.entity.Location;
+import com.lq.kexin_ca.entity.Location;
+import com.lq.kexin_ca.service.LocationService;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
