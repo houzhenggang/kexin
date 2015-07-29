@@ -3,8 +3,8 @@
 
 <mapper namespace="com.lq.kexin_ca.dao.ILocationDao">
     <insert id="addLocation">
-        INSERT INTO location (user_id, time, longitude, latitude)
-        VALUES (#{userId}, #{time}, #{longitude}, #{latitude})
+        INSERT INTO location (user_id, time, longitude, latitude, result)
+        VALUES (#{userId}, #{time}, #{longitude}, #{latitude}, #{result})
     </insert>
 
     <select id="selectLocationsByUserID" resultType="com.lq.kexin_ca.entity.Location">

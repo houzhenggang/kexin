@@ -1,6 +1,7 @@
 package com.lq.kexin_ca.controller;
 
 import com.lq.kexin_ca.entity.Location;
+import com.lq.kexin_ca.entity.LocationDTO;
 import com.lq.kexin_ca.service.LocationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,10 +21,12 @@ public class LocationController {
 
     @RequestMapping(value = "/upload")
     @ResponseBody
-    public String uploadLocation(@RequestBody Location location) {
+    public String uploadLocation(@RequestBody LocationDTO location) {
         System.out.println(location);
-        if (locationService.saveLocation(location) == 0) return "UploadFail";
-        return "UploadSuccess";
+        final int result = locationService.saveLocation(location);
+        if (result == 0) return "UploadSuccess";
+        else if (result == 1) return "LocationException";
+        return "UploadFail";
     }
 
     @RequestMapping(value = "/list/{userId}")

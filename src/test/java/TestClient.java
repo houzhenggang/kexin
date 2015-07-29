@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lq.kexin_ca.entity.LocationDTO;
 import com.lq.kexin_ca.entity.Location;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -31,7 +32,7 @@ public class TestClient {
                 .build();
         try {
             login(httpclient, cookieStore);
-            getLocationList(httpclient, cookieStore);
+//            getLocationList(httpclient, cookieStore);
             LocationUpload(httpclient, cookieStore);
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -63,7 +64,7 @@ public class TestClient {
             List<Location> locations = objectMapper.readValue(EntityUtils.toString(entity), new TypeReference<List<Location>>() {
             });
             System.out.println(locations);
-            showCookies(cookieStore);
+            //          showCookies(cookieStore);
         } finally {
             locationListResponse.close();
         }
@@ -80,18 +81,23 @@ public class TestClient {
         try {
             HttpEntity entity = response.getEntity();
             System.out.println(EntityUtils.toString(entity));
-            showCookies(cookieStore);
+            //           showCookies(cookieStore);
         } finally {
             response.close();
         }
     }
 
     private static void LocationUpload(CloseableHttpClient httpclient, BasicCookieStore cookieStore) throws IOException {
-        LocalDateTime time = LocalDateTime.of(2015, 7, 8, 14, 12);
-        Location location = new Location(1, Timestamp.valueOf(time), 123.5, 45.5);
+        HttpPost post = new HttpPost(localURL + "/location/upload");
+
+        LocalDateTime time = LocalDateTime.now();
+        LocationDTO location = new LocationDTO(1, Timestamp.valueOf(time), 123.524, 45.5);
         ObjectMapper objectMapper = new ObjectMapper();
 
-        HttpPost post = new HttpPost(localURL + "/location/upload");
+        //     User user = new User(1, "fe", "4", "32", "12");
+
+
+        System.out.println(objectMapper.writeValueAsString(location));
 
         StringEntity postingString = new StringEntity(objectMapper.writeValueAsString(location));//convert your pojo to   json
         post.setEntity(postingString);
@@ -101,7 +107,7 @@ public class TestClient {
             HttpEntity entity = response.getEntity();
             System.out.println(EntityUtils.toString(entity));
 
-            showCookies(cookieStore);
+            //          showCookies(cookieStore);
         } finally {
             response.close();
         }
@@ -131,7 +137,7 @@ public class TestClient {
         try {
             HttpEntity entity = response.getEntity();
             System.out.println(EntityUtils.toString(entity));
-            showCookies(cookieStore);
+            //          showCookies(cookieStore);
         } finally {
             response.close();
         }

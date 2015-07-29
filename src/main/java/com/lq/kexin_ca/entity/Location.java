@@ -8,12 +8,22 @@ public class Location {
     Timestamp time;
     double longitude;
     double latitude;
+    int result;
 
-    public Location(int userId, Timestamp time, double longitude, double latitude) {
+    public Location(int userId, Timestamp time, double longitude, double latitude, int result) {
         this.userId = userId;
         this.time = time;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.result = result;//0：正常，1：异常
+    }
+
+    public Location(LocationDTO locationDTO, int result) {
+        this.userId = locationDTO.getUserId();
+        this.time = locationDTO.getTime();
+        this.longitude = locationDTO.getLongitude();
+        this.latitude = locationDTO.getLatitude();
+        this.result = result;
     }
 
     public Location() {
@@ -52,13 +62,22 @@ public class Location {
         this.userId = userId;
     }
 
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
                 "userId=" + userId +
-                ", time='" + time + '\'' +
+                ", time=" + time +
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
+                ", result=" + result +
                 '}';
     }
 }
