@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lq.kexin_ca.dao.IStayPointsDao" >
-  <resultMap id="BaseResultMap" type="com.lq.kexin_ca.entity.StayPoints" >
+<mapper namespace="com.tongji.kexin_ca.dao.IStayPointsDao" >
+  <resultMap id="BaseResultMap" type="com.tongji.kexin_ca.entity.StayPoints" >
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <id column="start_time" property="startTime" jdbcType="TIMESTAMP" />
     <id column="end_time" property="endTime" jdbcType="TIMESTAMP" />
@@ -40,7 +40,7 @@
   <sql id="Base_Column_List" >
     user_id, start_time, end_time, lon, lat
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.lq.kexin_ca.entity.StayPointsExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tongji.kexin_ca.entity.StayPointsExample" >
     select
     <if test="distinct" >
       distinct
@@ -68,13 +68,13 @@
       and start_time = #{startTime,jdbcType=TIMESTAMP}
       and end_time = #{endTime,jdbcType=TIMESTAMP}
   </delete>
-  <insert id="insert" parameterType="com.lq.kexin_ca.entity.StayPoints" >
+  <insert id="insert" parameterType="com.tongji.kexin_ca.entity.StayPoints" >
     insert into stay_points (user_id, start_time, end_time, 
       lon, lat)
     values (#{userId,jdbcType=INTEGER}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, 
       #{lon,jdbcType=DOUBLE}, #{lat,jdbcType=DOUBLE})
   </insert>
-  <insert id="insertSelective" parameterType="com.lq.kexin_ca.entity.StayPoints" >
+  <insert id="insertSelective" parameterType="com.tongji.kexin_ca.entity.StayPoints" >
     insert into stay_points
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
@@ -111,7 +111,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lq.kexin_ca.entity.StayPoints" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.tongji.kexin_ca.entity.StayPoints" >
     update stay_points
     <set >
       <if test="lon != null" >
@@ -125,7 +125,7 @@
       and start_time = #{startTime,jdbcType=TIMESTAMP}
       and end_time = #{endTime,jdbcType=TIMESTAMP}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lq.kexin_ca.entity.StayPoints" >
+  <update id="updateByPrimaryKey" parameterType="com.tongji.kexin_ca.entity.StayPoints" >
     update stay_points
     set lon = #{lon,jdbcType=DOUBLE},
       lat = #{lat,jdbcType=DOUBLE}

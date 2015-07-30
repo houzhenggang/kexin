@@ -25,7 +25,7 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <javaModelGenerator targetPackage="com.lq.mybatis_generator.model"
+        <javaModelGenerator targetPackage="com.tongji.mybatis_generator.model"
                             targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->
@@ -34,14 +34,14 @@
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.lq.mybatis_generator.mapper"
+        <sqlMapGenerator targetPackage="com.tongji.mybatis_generator.mapper"
                          targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for
       the objects based on the catalog and schema of the introspected table -->
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.lq.mybatis_generator.dao"
+        <javaClientGenerator targetPackage="com.tongji.mybatis_generator.dao"
                              targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED"
                              type="XMLMAPPER">
             <!-- This property is used to select whether MyBatis Generator will generate different Java packages for

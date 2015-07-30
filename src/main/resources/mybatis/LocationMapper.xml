@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.lq.kexin_ca.dao.ILocationDao">
+<mapper namespace="com.tongji.kexin_ca.dao.ILocationDao">
     <insert id="addLocation">
         INSERT INTO location (user_id, time, longitude, latitude, result)
         VALUES (#{userId}, #{time}, #{longitude}, #{latitude}, #{result})
     </insert>
 
-    <select id="selectLocationsByUserID" resultType="com.lq.kexin_ca.entity.Location">
+    <select id="selectLocationsByUserID" resultType="com.tongji.kexin_ca.entity.Location">
         SELECT *
         FROM location
         WHERE user_id = #{userId}
@@ -18,10 +18,16 @@
         FROM location
         WHERE user_id = #{userId}
     </select>
-    <select id="selectLocationByUserIDandDate" resultType="com.lq.kexin_ca.entity.Location">
+    <select id="selectLocationByUserIDandDate" resultType="com.tongji.kexin_ca.entity.Location">
         SELECT *
         FROM location
         WHERE user_id = #{userId} AND date(time) = date(#{date})
+        ORDER BY time ASC
 
+    </select>
+
+    <select id="getAllUserIds" resultType="java.lang.Integer">
+        SELECT DISTINCT *
+        FROM users
     </select>
 </mapper>
