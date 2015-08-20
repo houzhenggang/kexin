@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Service
+@Component('stayPointDetectionService')
 public class StayPointDetectionService {
 
     /**
@@ -67,8 +67,6 @@ public class StayPointDetectionService {
         List<Integer> idslist = this.getLocationDao().getAllUserIds();
         System.out.println(idslist.size());
         for (Integer userId : idslist) {
-
-
             List<Location> list = this.getLocationDao().selectLocationByUserIDandDate(userId, ts);
             boolean tag = false;
             System.out.println(list.size());

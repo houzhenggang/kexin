@@ -5,12 +5,13 @@ import java.sql.Timestamp;
 
 public class Time {
 
+
 	/**
-	 * ����ʱ���
 	 * 
-	 * @param 
 	 * 
-	 * @return ��ʱ��� < 1200s,����0����ʱ��� > 1200s,����1
+	 * @author xubing
+	 * @param Timestamp
+	 * @message 计算两时间戳之间的毫秒差
 	 */
 	public static long CalTimeDiff(Timestamp timestamp, Timestamp timestamp2)
 	{ 		

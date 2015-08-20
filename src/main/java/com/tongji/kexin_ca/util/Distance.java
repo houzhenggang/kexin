@@ -12,7 +12,7 @@ public class Distance {
 
 	 /**
 	  * 
-	  * �������
+	  * 计算两gps坐标间的距离，单位为米
 	  * 
 	  * @param 
 	  */

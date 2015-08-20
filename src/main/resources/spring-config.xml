@@ -61,5 +61,35 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
+    <!-- the settings of quartz's job for detecting the staypoints periodly-->
+    <!-- For times when you need more complex processing, passing data to the scheduled job -->
+    <bean name="stayPointDetectionJobDetail"    class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.tongji.kexin_ca.quartz.StayPointDetectionService" />
+        <property name="jobDataMap">
+            <map>
+                <entry key="stayPointDetectionService" value-ref="stayPointDetectionService" />
+            </map>
+        </property>
+        <property name="durability" value="true" />
+    </bean>
 
+    <bean id="cronTrigger"  class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="stayPointDetectionJobDetail" />
+        <property name="cronExpression" value="30 30 23,0,0 * * ?" />
+    </bean>
+
+    <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
+    <bean  class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="jobDetails">
+            <list>
+                <ref bean="stayPointDetectionJobDetail" />
+            </list>
+        </property>
+     
+        <property name="triggers">
+            <list>
+                <ref bean="cronTrigger" />
+            </list>
+        </property>
+    </bean>
 </beans>
