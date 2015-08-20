@@ -5,18 +5,18 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import com.tongji.kexin_ca.service.StayPointDetectionService
+import com.tongji.kexin_ca.service.StayPointDetectionService;
 
-public class StayPointScheduledJob extends QuartzJobBean{
+public class StayPointScheduledJob extends QuartzJobBean {
 
-	private StayPointDetectionService stayPointDetectionService;
+    private StayPointDetectionService stayPointDetectionService;
 
-	protected void executeInternal(JobExecutionContext arg0)
+    protected void executeInternal(JobExecutionContext arg0)
             throws JobExecutionException {
         stayPointDetectionService.stayPointDetection();
     }
 
-    public void setStayPointDetectionService(StayPointDetectionService object){
-    	this.StayPointDetectionService = object;
+    public void setStayPointDetectionService(StayPointDetectionService object) {
+        this.stayPointDetectionService = object;
     }
 }
