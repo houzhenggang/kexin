@@ -61,8 +61,7 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <!-- the settings of quartz's job for detecting the staypoints periodly-->
-    <!-- For times when you need more complex processing, passing data to the scheduled job -->
+
     <bean name="stayPointDetectionJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
         <property name="jobClass" value="com.tongji.kexin_ca.quartz.StayPointScheduledJob"/>
         <property name="jobDataMap">
@@ -73,9 +72,19 @@
         <property name="durability" value="true"/>
     </bean>
 
-    <bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+    <bean name="tokenDeleteScheduledJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.tongji.kexin_ca.quartz.TokenDeleteScheduledJob"/>
+        <property name="durability" value="true"/>
+    </bean>
+
+    <bean id="stayPointDetectionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="stayPointDetectionJobDetail"/>
-        <property name="cronExpression" value="30 30 23,0,0 * * ?"/>
+        <property name="cronExpression" value="30 30 23 * * ?"/>
+    </bean>
+
+    <bean id="tokenDeleteTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="tokenDeleteScheduledJobDetail"/>
+        <property name="cronExpression" value="0 */1 * * * ?"/>
     </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
@@ -83,12 +92,14 @@
         <property name="jobDetails">
             <list>
                 <ref bean="stayPointDetectionJobDetail"/>
+                <ref bean="tokenDeleteScheduledJobDetail"/>
             </list>
         </property>
 
         <property name="triggers">
             <list>
-                <ref bean="cronTrigger"/>
+                <ref bean="stayPointDetectionTrigger"/>
+                <ref bean="tokenDeleteTrigger"/>
             </list>
         </property>
     </bean>

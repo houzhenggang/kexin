@@ -4,8 +4,6 @@ import com.tongji.kexin_ca.entity.User;
 
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -15,21 +13,6 @@ public class TokenManager {
     }
 
     private static final Map<String, Token> tokenMap = new ConcurrentHashMap<String, Token>();
-
-    static {
-        new Timer(true).schedule(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("目前所有的token：");
-                System.out.println(tokenMap);
-                for (Map.Entry<String, Token> entry : tokenMap.entrySet()) {
-                    if (entry.getValue().isExpire()) {
-                        tokenMap.remove(entry.getKey());
-                    }
-                }
-            }
-        }, 600000, 600000);//每10分清除过期的token
-    }
 
     /**
      * @param s token
@@ -54,6 +37,16 @@ public class TokenManager {
         String s = uuid.toString();
         tokenMap.put(s, new Token(user.getUserId()));
         return s;
+    }
+
+    public static void deleteExpiredTokens() {
+        System.out.println("目前所有的token：");
+        System.out.println(tokenMap);
+        for (Map.Entry<String, Token> entry : tokenMap.entrySet()) {
+            if (entry.getValue().isExpire()) {
+                tokenMap.remove(entry.getKey());
+            }
+        }
     }
 }
 
