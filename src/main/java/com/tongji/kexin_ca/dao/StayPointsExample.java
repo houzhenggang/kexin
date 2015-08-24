@@ -1,4 +1,4 @@
-package com.tongji.kexin_ca.entity;
+package com.tongji.kexin_ca.dao;
 
 import java.util.ArrayList;
 import java.util.Date;

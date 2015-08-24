@@ -1,7 +1,6 @@
 package com.tongji.kexin_ca.dao;
 
 import com.tongji.kexin_ca.entity.StayPoints;
-import com.tongji.kexin_ca.entity.StayPointsExample;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -22,5 +21,6 @@ public interface IStayPointsDao {
 
     int updateByPrimaryKey(StayPoints record);
 
-    List<Integer> getAllUserIds();
+    List<StayPoints> getAllStaypoints();
+
 }

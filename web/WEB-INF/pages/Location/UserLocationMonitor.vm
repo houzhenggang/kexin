@@ -58,9 +58,9 @@
                         var i;
                         for (i = 0; i < data.length; i++) {
                             data[i].time = new Date(data[i].time).format("yyyy-MM-dd hh:mm:ss.S");
-                            $("#ub-table").datagrid('insertRow', {index: 0, row: data[i]});
-                            if ($("#ub-table").datagrid('getRows').length >= 50) {
-                                $("#ub-table").datagrid('deleteRow', $("#ub-table").datagrid('getRows').length - 1);
+                            $("#location-table").datagrid('insertRow', {index: 0, row: data[i]});
+                            if ($("#location-table").datagrid('getRows').length >= 50) {
+                                $("#location-table").datagrid('deleteRow', $("#location-table").datagrid('getRows').length - 1);
                             }
                         }
                         if (data.length != 0) {
@@ -69,6 +69,11 @@
                     }
                 });
             }, 2000);
+
+            setInterval(function () {
+                window.location.reload();
+            }, 3600000)
+
         });
     </script>
 </head>
@@ -77,10 +82,10 @@
     <div id="body">
         <div class="z-box" style="margin-top: 60px;">
             <div class="z-box-title">
-                <span class="z-desc">用户地理位置监控器</span>
+                <span class="z-desc">用户地理位置信息</span>
             </div>
             <div class="z-box-content">
-                <table id="ub-table" class="easyui-datagrid" style="height:470px;"
+                <table id="location-table" class="easyui-datagrid" style="height:470px;"
                        data-options="singleSelect:true,collapsible:true,rowStyler:markRed">
                     <thead>
                     <tr>
@@ -107,5 +112,41 @@
         </div>
     </div>
 </div>
+
+<div id="container">
+    <div id="body">
+        <div class="z-box" style="margin-top: 60px;">
+            <div class="z-box-title">
+                <span class="z-desc">用户逗留点信息</span>
+            </div>
+            <div class="z-box-content">
+                <table id="staypoint-table" class="easyui-datagrid" style="height:250px;"
+                       data-options="singleSelect:true,collapsible:true,rowStyler:markRed">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'userId',width:90,align:'center'">用户ID</th>
+                        <th data-options="field:'startTime',width:240,align:'center'">开始时间</th>
+                        <th data-options="field:'endTime',width:240,align:'center'">终止时间</th>
+                        <th data-options="field:'lon',width:190,align:'center'">经度</th>
+                        <th data-options="field:'lat',width:190,align:'center'">纬度</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        #foreach($staypoint in $stayPointList)
+                        <tr>
+                            <td>$staypoint.userId</td>
+                            <td>$dateTool.format("yyyy-MM-dd hh:mm:ss.S",$staypoint.startTime)</td>
+                            <td>$dateTool.format("yyyy-MM-dd hh:mm:ss.S",$staypoint.endTime)</td>
+                            <td>$staypoint.lon</td>
+                            <td>$staypoint.lat</td>
+                        </tr>
+                        #end
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Component("stayPointDetectionService")
-public class StayPointDetectionService {
+@Component("stayPointService")
+public class StayPointService {
 
     /**
      * gpslogsdao对应 你那边的gpslog获取dao
@@ -98,6 +98,10 @@ public class StayPointDetectionService {
             }
         }
 
+    }
+
+    public List<StayPoints> getAllStaypoints() {
+        return stayPointDao.getAllStaypoints();
     }
 
 }

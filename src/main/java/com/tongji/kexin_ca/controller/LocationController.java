@@ -2,7 +2,10 @@ package com.tongji.kexin_ca.controller;
 
 import com.tongji.kexin_ca.dto.LocationDTO;
 import com.tongji.kexin_ca.entity.Location;
+import com.tongji.kexin_ca.entity.StayPoints;
 import com.tongji.kexin_ca.service.LocationService;
+import com.tongji.kexin_ca.service.StayPointService;
+import org.apache.velocity.tools.generic.DateTool;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,8 @@ public class LocationController {
     @Resource
     private LocationService locationService;
 
+    @Resource
+    private StayPointService stayPointService;
 
     @RequestMapping(value = "/upload")
     @ResponseBody
@@ -48,6 +53,12 @@ public class LocationController {
     public String userLocationMonitor(ModelMap model) {
         final List<Location> locationList = locationService.getAllLocations();
         model.addAttribute("locationList", locationList);
+
+        final List<StayPoints> StaypointsList = stayPointService.getAllStaypoints();
+
+        model.addAttribute("stayPointList", StaypointsList);
+
+        model.addAttribute("dateTool", new DateTool());
         return "Location/UserLocationMonitor";
     }
 

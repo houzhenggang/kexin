@@ -67,7 +67,7 @@
         <property name="jobClass" value="com.tongji.kexin_ca.quartz.StayPointScheduledJob"/>
         <property name="jobDataMap">
             <map>
-                <entry key="stayPointDetectionService" value-ref="stayPointDetectionService"/>
+                <entry key="stayPointService" value-ref="stayPointService"/>
             </map>
         </property>
         <property name="durability" value="true"/>

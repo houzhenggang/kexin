@@ -4,7 +4,10 @@ body {
 
 #container {
     width: 960px;
-    margin: 0 auto;
+    margin-top: 0;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 20px;
 }
 
 #head {
@@ -13,6 +16,7 @@ body {
 
 #body {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 #footer {
