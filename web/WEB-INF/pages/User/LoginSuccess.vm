@@ -4,6 +4,6 @@
     <title>loginSuccess</title>
 </head>
 <body>
-${user.toString()}
+    ${user.name}用户您好，您已登陆成功！
 </body>
 </html>

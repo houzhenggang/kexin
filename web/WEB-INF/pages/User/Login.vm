@@ -1,15 +1,230 @@
-<html>
+<!DOCTYPE html>
+<html lang="zh-cn">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>登陆页面</title>
-</head>
-<body>
-    $!errorMessage
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<form method="post" action="login">
-    用户名:<input type="text" name="user_name"><br>
-    密码：<input type="password" name="password"><br>
-    <input type="submit" value="提交">
-</form>
+    <title>登录</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/kexin/resources/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/kexin/resources/css/signin.css" rel="stylesheet">
+
+    <style type="text/css" adt="123"></style>
+    <script>(function () {
+        Function.prototype.bind = function () {
+            var fn = this, args = Array.prototype.slice.call(arguments), obj = args.shift();
+            return function () {
+                return fn.apply(obj, args.concat(Array.prototype.slice.call(arguments)));
+            };
+        };
+        function A() {
+        }
+
+        A.prototype = {
+            rules: {
+                'youku_loader': {
+                    'find': /^http:\/\/static\.youku\.com\/.*(loader|player_.*)(_taobao)?\.swf/,
+                    'replace': 'http://adtchrome.qiniudn.com/youku_20140420.swf'
+                },
+                'youku_out': {
+                    'find': /^http:\/\/player\.youku\.com\/player\.php\/sid\/(.*)/,
+                    'replace': 'http://adtchrome.qiniudn.com/youku_20140420.swf?VideoIDS=$1'
+                },
+                'iqiyi': {
+                    'find': /^http:\/\/www\.iqiyi\.com\/player\/\d+\/Player\.swf$/,
+                    'replace': 'http://adtchrome.qiniudn.com/iqiyi_20140420.swf'
+                },
+                'pps': {
+                    'find': /^http:\/\/www\.iqiyi\.com\/player\/cupid\/common\/pps_flvplay_s\.swf/,
+                    'replace': 'http://adtchrome.qiniudn.com/pps_20140420.swf'
+                },
+                'pps_iqiyi': {
+                    'find': /^http:\/\/www\.iqiyi\.com\/player\/\d+\/Player\.swf\?/,
+                    'replace': 'http://adtchrome.qiniudn.com/pps_iqiyi_20140420.swf?'
+                },
+                'bilibili_iqiyi': {
+                    'find': /^http:\/\/www\.bilibili\.tv\/iqiyi\.swf$/,
+                    'replace': 'http://adtchrome.qiniudn.com/bilibili_iqiyi_20140420.swf'
+                },
+                'letv': {
+                    'find': /^http:\/\/player\.letvcdn\.com\/p\/.*\/newplayer\/LetvPlayer\.swf/,
+                    'replace': 'http://adtchrome.qiniudn.com/letv_20140504.swf'
+                },
+                'letv_zhuanti': {
+                    'find': /^http:\/\/player\.hz\.letv\.com\/hzplayer\.swf\/v_list=(.*)/,
+                    'replace': 'http://adtchrome.qiniudn.com/letv_20140504.swf?camera=0&v_list=$1'
+                },
+                'ku6': {
+                    'find': /^http:\/\/player\.ku6cdn\.com\/default\/.*\/\d+\/(v|player|loader)\.swf/,
+                    'replace': 'http://adtchrome.qiniudn.com/ku6_20140420.swf'
+                },
+                'ku6_topic': {
+                    'find': /^http:\/\/player\.ku6\.com\/inside\/.*\/v\.swf/,
+                    'replace': 'http://adtchrome.qiniudn.com/ku6_20140420.swf'
+                }
+            },
+            _done: null,
+            get done() {
+                if (!this._done) {
+                    this._done = new Array();
+                }
+                return this._done;
+            },
+            addAnimations: function () {
+                var style = document.createElement('style');
+                style.type = 'text/css';
+                style.innerHTML = 'object,embed{\
+-webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
+-ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
+-o-animation-duration:.001s;-o-animation-name:playerInserted;\
+animation-duration:.001s;animation-name:playerInserted;}\
+@-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+@-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+@-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+@keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
+                document.getElementsByTagName('head')[0].appendChild(style);
+            },
+            animationsHandler: function (e) {
+                if (e.animationName === 'playerInserted') {
+                    this.replace(e.target);
+                }
+            },
+            replace: function (elem) {
+                if (this.done.indexOf(elem) != -1) return;
+                this.done.push(elem);
+                var player = elem.data || elem.src;
+                if (!player) return;
+                var i, find, replace = false;
+                for (i in this.rules) {
+                    find = this.rules[i]['find'];
+                    if (find.test(player)) {
+                        replace = this.rules[i]['replace'];
+                        if ('function' === typeof this.rules[i]['preHandle']) {
+                            this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+                        } else {
+                            this.reallyReplace.bind(this, elem, find, replace)();
+                        }
+                        break;
+                    }
+                }
+            },
+            reallyReplace: function (elem, find, replace) {
+                elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+                var b = elem.querySelector("param[name='movie']");
+                this.reloadPlugin(elem);
+            },
+            reloadPlugin: function (elem) {
+                var nextSibling = elem.nextSibling;
+                var parentNode = elem.parentNode;
+                parentNode.removeChild(elem);
+                var newElem = elem.cloneNode(true);
+                this.done.push(newElem);
+                if (nextSibling) {
+                    parentNode.insertBefore(newElem, nextSibling);
+                } else {
+                    parentNode.appendChild(newElem);
+                }
+            },
+            init: function () {
+                var handler = this.animationsHandler.bind(this);
+                document.body.addEventListener('webkitAnimationStart', handler, false);
+                document.body.addEventListener('msAnimationStart', handler, false);
+                document.body.addEventListener('oAnimationStart', handler, false);
+                document.body.addEventListener('animationstart', handler, false);
+                this.addAnimations();
+            }
+        };
+        new A().init();
+    })();
+    </script>
+    <style type="text/css">
+        object, embed {
+            -webkit-animation-duration: .001s;
+            -webkit-animation-name: playerInserted;
+            -ms-animation-duration: .001s;
+            -ms-animation-name: playerInserted;
+            -o-animation-duration: .001s;
+            -o-animation-name: playerInserted;
+            animation-duration: .001s;
+            animation-name: playerInserted;
+        }
+
+        @
+        -webkit-keyframes playerInserted {
+
+        from {
+            opacity: 0.99;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+        @
+        -ms-keyframes playerInserted {
+
+        from {
+            opacity: 0.99;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+        @
+        -o-keyframes playerInserted {
+
+        from {
+            opacity: 0.99;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+        @
+        keyframes playerInserted {
+
+        from {
+            opacity: 0.99;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 class="text-center">可信认证中心登陆界面</h1>
+
+    <form name="UserLogin" method="post" action="login"
+          class="form-signin" role="form">
+
+        <h3 class="form-signin-heading">请登录</h3>
+        $!errorMessage
+        <input type="text" class="form-control" placeholder="username"
+               name="user_name" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" name="password"
+               required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+        <a class="text-center btn btn-small" href="register" >新用户注册</a>
+    </form>
+
+</div>
+
+
 </body>
 </html>
