@@ -32,7 +32,6 @@ public class TokenManager {
     }
 
     /**
-     *
      * @param s token
      * @return userid,-1表示无此token或已过期
      */

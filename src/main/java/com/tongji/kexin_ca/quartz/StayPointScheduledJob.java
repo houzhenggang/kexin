@@ -1,11 +1,10 @@
 package com.tongji.kexin_ca.quartz;
 
 
+import com.tongji.kexin_ca.service.StayPointDetectionService;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-
-import com.tongji.kexin_ca.service.StayPointDetectionService;
 
 public class StayPointScheduledJob extends QuartzJobBean {
 

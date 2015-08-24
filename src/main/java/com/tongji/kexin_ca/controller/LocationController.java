@@ -1,7 +1,7 @@
 package com.tongji.kexin_ca.controller;
 
-import com.tongji.kexin_ca.entity.Location;
 import com.tongji.kexin_ca.dto.LocationDTO;
+import com.tongji.kexin_ca.entity.Location;
 import com.tongji.kexin_ca.service.LocationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
