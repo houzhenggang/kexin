@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Component("stayPointService")
@@ -20,7 +21,6 @@ public class StayPointService {
      */
     @Autowired
     ILocationDao locationDao;
-
 
     /**
      * staypoint dao 对应 保存staypoint的dao
@@ -66,6 +66,8 @@ public class StayPointService {
     public void stayPointDetection() {
         List<Integer> idslist = this.getLocationDao().getAllUserIds();
         System.out.println(idslist.size());
+        Date d = new Date();
+        Timestamp ts = new Timestamp(d.getTime());
         for (Integer userId : idslist) {
             List<Location> list = this.getLocationDao().selectLocationByUserIDandDate(userId, ts);
             boolean tag = false;
