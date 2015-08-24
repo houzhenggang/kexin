@@ -1,6 +1,6 @@
 package com.tongji.kexin_ca.service;
 
-import com.tongji.kexin_ca.entity.LocationDTO;
+import com.tongji.kexin_ca.dto.LocationDTO;
 import com.tongji.kexin_ca.dao.ILocationDao;
 import com.tongji.kexin_ca.dao.IStayPointsDao;
 import com.tongji.kexin_ca.entity.Location;
@@ -92,5 +92,13 @@ public class LocationService {
             return false;
         }
         return true;
+    }
+
+    public List<Location> getAllLocations() {
+        return locationDao.getLocationsAfterGivenTime(Timestamp.valueOf("1980-01-01 00:00:00"));
+    }
+
+    public List<Location> getNewUploadedLocation(Timestamp startTime) {
+        return locationDao.getLocationsAfterGivenTime(startTime);
     }
 }

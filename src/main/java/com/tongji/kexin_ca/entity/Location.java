@@ -1,5 +1,7 @@
 package com.tongji.kexin_ca.entity;
 
+import com.tongji.kexin_ca.dto.LocationDTO;
+
 import java.sql.Timestamp;
 
 public class Location {

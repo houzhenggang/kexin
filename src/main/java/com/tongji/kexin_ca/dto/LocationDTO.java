@@ -1,4 +1,4 @@
-package com.tongji.kexin_ca.entity;
+package com.tongji.kexin_ca.dto;
 
 import java.sql.Timestamp;
 

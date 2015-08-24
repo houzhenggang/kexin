@@ -1,15 +1,17 @@
 package com.tongji.kexin_ca.controller;
 
 import com.tongji.kexin_ca.entity.Location;
-import com.tongji.kexin_ca.entity.LocationDTO;
+import com.tongji.kexin_ca.dto.LocationDTO;
 import com.tongji.kexin_ca.service.LocationService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -39,6 +41,25 @@ public class LocationController {
     @ResponseBody
     public String countUserLocation(@PathVariable int userId) {
         return String.valueOf(locationService.countUserLocation(userId));
+
+    }
+
+    @RequestMapping(value = "/display/monitor")
+    public String userLocationMonitor(ModelMap model) {
+        final List<Location> locationList = locationService.getAllLocations();
+        model.addAttribute("locationList", locationList);
+        return "Location/UserLocationMonitor";
+    }
+
+    @RequestMapping(value = "/display/newUploadedLocation")
+    @ResponseBody
+    public List<Location> getNewUploadedLocation(String stringStartTime) {
+        System.out.println("1:" + stringStartTime);
+        final Timestamp startTime = Timestamp.valueOf(stringStartTime);
+        System.out.println("2:" + startTime);
+        final List<Location> newUploadedLocationList = locationService.getNewUploadedLocation(startTime);
+        System.out.println(newUploadedLocationList);
+        return newUploadedLocationList;
 
     }
 

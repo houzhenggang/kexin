@@ -30,4 +30,11 @@
         SELECT DISTINCT *
         FROM users
     </select>
+    <select id="getLocationsAfterGivenTime" resultType="com.tongji.kexin_ca.entity.Location">
+        SELECT *
+        FROM location
+        WHERE time > #{startTime}
+        ORDER BY time DESC
+        LIMIT 30
+    </select>
 </mapper>

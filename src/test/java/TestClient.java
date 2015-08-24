@@ -1,6 +1,6 @@
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tongji.kexin_ca.entity.LocationDTO;
+import com.tongji.kexin_ca.dto.LocationDTO;
 import com.tongji.kexin_ca.entity.Location;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;

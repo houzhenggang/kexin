@@ -19,4 +19,6 @@ public interface ILocationDao {
 
 
     List<Integer> getAllUserIds();
+
+    List<Location> getLocationsAfterGivenTime(@Param("startTime") Timestamp startTime);
 }
