@@ -35,6 +35,6 @@
         FROM location
         WHERE time > #{startTime}
         ORDER BY time DESC
-        LIMIT 30
+        LIMIT 50
     </select>
 </mapper>

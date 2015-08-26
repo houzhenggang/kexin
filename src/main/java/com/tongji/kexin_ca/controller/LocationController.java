@@ -65,9 +65,8 @@ public class LocationController {
     @RequestMapping(value = "/display/newUploadedLocation")
     @ResponseBody
     public List<Location> getNewUploadedLocation(String stringStartTime) {
-        System.out.println("1:" + stringStartTime);
         final Timestamp startTime = Timestamp.valueOf(stringStartTime);
-        System.out.println("2:" + startTime);
+        System.out.println("startTime: " + startTime);
         final List<Location> newUploadedLocationList = locationService.getNewUploadedLocation(startTime);
         System.out.println(newUploadedLocationList);
         return newUploadedLocationList;

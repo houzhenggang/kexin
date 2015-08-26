@@ -40,7 +40,7 @@
         var count = 0;
         function markRed(index, row) {
             count++;
-            if (row.result == 1) {
+            if (row.result == '异常') {
                 return 'background-color:#ffee00; color:red;';
             }
             if (count % 2 == 0) {
@@ -58,6 +58,11 @@
                         var i;
                         for (i = 0; i < data.length; i++) {
                             data[i].time = new Date(data[i].time).format("yyyy-MM-dd hh:mm:ss.S");
+                            if (data[i].result == 1) {
+                                data[i].result = '异常';
+                            }
+                            else
+                                data[i].result = '正常';
                             $("#location-table").datagrid('insertRow', {index: 0, row: data[i]});
                             if ($("#location-table").datagrid('getRows').length >= 50) {
                                 $("#location-table").datagrid('deleteRow', $("#location-table").datagrid('getRows').length - 1);
@@ -103,7 +108,11 @@
                             <td>$Location.time</td>
                             <td>$Location.longitude</td>
                             <td>$Location.latitude</td>
-                            <td>$Location.result</td>
+                            #if($Location.result == 1)
+                                <td>异常</td>
+                            #else
+                                <td>正常</td>
+                            #end
                         </tr>
                         #end
                     </tbody>
