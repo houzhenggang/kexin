@@ -38,8 +38,8 @@
     </properties>
 
     <dependencies>
-        
-        
+
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
@@ -51,7 +51,7 @@
             <artifactId>spring-tx</artifactId>
             <version>${springframework.version}</version>
         </dependency>
-         
+
         <!-- Quartz framework -->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>

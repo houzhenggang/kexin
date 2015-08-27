@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class UserController {
     @Resource
     private UserService userService;
+    public static final String adminName = "lq";
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
@@ -27,7 +28,12 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html")
     public String loginHTML(ModelMap model, String user_name, String password, HttpServletResponse response) {
 
-        if (handleLogin(model, user_name, password, response)) return "User/LoginSuccess";
+        if (handleLogin(model, user_name, password, response)) {
+            if (user_name.equalsIgnoreCase(adminName)) {
+                return "redirect:/monitor";
+            }
+            return "User/LoginSuccess";
+        }
         return "User/Login";
 
     }
