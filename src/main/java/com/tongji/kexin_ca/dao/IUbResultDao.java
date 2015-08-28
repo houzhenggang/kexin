@@ -1,8 +1,8 @@
 package com.tongji.kexin_ca.dao;
 
 import com.tongji.kexin_ca.entity.UbResult;
+import org.apache.ibatis.annotations.Param;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -11,5 +11,5 @@ public interface IUbResultDao {
 
     int insertSelective(UbResult record);
 
-    List<UbResult> getUbResultAfterGivenTime(Date timestamp);
+    List<UbResult> getUbResultSelectively(@Param("userId") int userId, @Param("startTime") Date startTime);
 }

@@ -19,21 +19,21 @@ public class UserBehaviorController {
     @Resource
     UbService ubService;
 
-
     @RequestMapping(value = "/display/monitor")
-    public String userLocationMonitor(ModelMap model) {
-        final List<UbResult> ubResultList = ubService.getAllUbResult();
+    public String userLocationMonitor(int userId, ModelMap model) {
+        final List<UbResult> ubResultList = ubService.getAllUbResult(userId);
         model.addAttribute("ubResultList", ubResultList);
         model.addAttribute("dateTool", new DateTool());
-        return "UserBehavior/ubMonitor";
+        model.addAttribute("userId", userId);
+        return "monitor/UbMonitor";
     }
 
     @RequestMapping(value = "/display/newUbResult")
     @ResponseBody
-    public List<UbResult> getNewUploadedLocation(String stringStartTime) {
+    public List<UbResult> getNewUploadedLocation(int userId, String stringStartTime) {
         final Timestamp startTime = Timestamp.valueOf(stringStartTime);
         System.out.println("startTime: " + startTime);
-        final List<UbResult> newUbResultList = ubService.getNewUbResultList(startTime);
+        final List<UbResult> newUbResultList = ubService.getNewUbResultList(userId, startTime);
         System.out.println(newUbResultList);
         return newUbResultList;
 

@@ -2,7 +2,11 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>用户浏览行为监控显示器</title>
+    #if($userId == -1)
+        <title>全部用户的浏览行为监控显示器</title>
+    #else
+        <title>单用户的浏览行为监控显示器</title>
+    #end
 
     <link href="/kexin/resources/css/reset.css" rel="stylesheet" type="text/css" media="screen"/>
     <link href="/kexin/resources/css/layout1.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -35,9 +39,11 @@
                                 ("00" + o[k]).substr(("" + o[k]).length));
             return format;
         }
-        var maxTime = '$dateTool.format("yyyy-MM-dd hh:mm:ss.S",$ubResultList[0].visitTime)';
-        //        var maxTime = '2015-07-30 23:40:52.0'
-
+            #if($ubResultList.size() == 0)
+            var maxTime = '1990-01-01 00:00:00.0'
+            #else
+            var maxTime = '$dateTool.format("yyyy-MM-dd hh:mm:ss.S",$ubResultList[0].visitTime)';
+            #end
         var count = 0;
         function markRed(index, row) {
             count++;
@@ -54,7 +60,7 @@
                     type: 'POST',
                     url: 'newUbResult',
                     dataType: 'json',
-                    data: {stringStartTime: maxTime},
+                    data: {stringStartTime: maxTime, userId:$userId},
                     success: function (data) {
                         var i;
                         for (i = 0; i < data.length; i++) {

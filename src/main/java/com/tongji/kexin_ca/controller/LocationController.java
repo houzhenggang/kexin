@@ -59,7 +59,7 @@ public class LocationController {
         model.addAttribute("stayPointList", StaypointsList);
 
         model.addAttribute("dateTool", new DateTool());
-        return "Location/UserLocationMonitor";
+        return "monitor/UserLocationMonitor";
     }
 
     @RequestMapping(value = "/display/newUploadedLocation")

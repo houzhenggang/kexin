@@ -50,14 +50,14 @@
         </property>
     </bean>
 
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/user/*"/>
-            <mvc:exclude-mapping path="/resources/**"/>
-            <bean class="com.tongji.kexin_ca.controller.LoginVerificationInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+    <!--<mvc:interceptors>-->
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<mvc:exclude-mapping path="/user/*"/>-->
+            <!--<mvc:exclude-mapping path="/resources/**"/>-->
+            <!--<bean class="com.tongji.kexin_ca.controller.LoginVerificationInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    <!--</mvc:interceptors>-->
 
     <bean id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

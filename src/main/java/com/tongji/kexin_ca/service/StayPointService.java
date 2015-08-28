@@ -78,7 +78,7 @@ public class StayPointService {
                     if (Math.abs(Time.CalTimeDiff(list.get(j).getTime(), list.get(i).getTime())) > timeThreh) {
                         double distance = Distance.CalDistance(list.get(j).getLatitude(), list.get(j).getLongitude(), list.get(i).getLatitude(), list.get(i).getLongitude());
                         if (distance <= distThreh) {
-                            double meanlat = (list.get(j).getLatitude() + list.get(i).getLongitude()) / 2;
+                            double meanlat = (list.get(j).getLatitude() + list.get(i).getLatitude()) / 2;
                             double meanlng = (list.get(j).getLongitude() + list.get(i).getLongitude()) / 2;
                             StayPoints sp = new StayPoints();
                             sp.setStartTime(list.get(i).getTime());

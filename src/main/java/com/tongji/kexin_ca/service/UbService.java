@@ -14,11 +14,11 @@ public class UbService {
     @Resource
     IUbResultDao ubResultDao;
 
-    public List<UbResult> getAllUbResult() {
-        return ubResultDao.getUbResultAfterGivenTime(Timestamp.valueOf("1980-01-01 00:00:00"));
+    public List<UbResult> getAllUbResult(int userId) {
+        return ubResultDao.getUbResultSelectively(userId, null);
     }
 
-    public List<UbResult> getNewUbResultList(Timestamp startTime) {
-        return ubResultDao.getUbResultAfterGivenTime(startTime);
+    public List<UbResult> getNewUbResultList(int userId, Timestamp startTime) {
+        return ubResultDao.getUbResultSelectively(userId, startTime);
     }
 }
