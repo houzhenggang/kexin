@@ -9,6 +9,6 @@ public class MonitorController {
 
     @RequestMapping("/monitor")
     public String showMonitor() {
-        return "MonitorIndex";
+        return "monitor/MonitorIndex";
     }
 }

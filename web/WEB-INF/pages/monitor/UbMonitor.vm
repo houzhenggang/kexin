@@ -94,7 +94,13 @@
     <div id="body">
         <div class="z-box" style="margin-top: 60px;">
             <div class="z-box-title">
-                <span class="z-desc">用户浏览行为信息</span>
+                <span class="z-desc">
+                    #if($userId == -1)
+                        全部用户的浏览行为信息
+                    #else
+                        单用户的浏览行为信息
+                    #end
+                </span>
             </div>
             <div class="z-box-content">
                 <table id="ubResult-table" class="easyui-datagrid" style="height:470px;"

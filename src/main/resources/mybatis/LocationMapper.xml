@@ -30,10 +30,17 @@
         SELECT DISTINCT *
         FROM users
     </select>
-    <select id="getLocationsAfterGivenTime" resultType="com.tongji.kexin_ca.entity.Location">
+    <select id="getLocationsSelectively" resultType="com.tongji.kexin_ca.entity.Location">
         SELECT *
         FROM location
-        WHERE time > #{startTime}
+        <where>
+            <if test="userId != -1">
+                user_id = #{userId}
+            </if>
+            <if test="startTime!= null">
+                and time > #{startTime}
+            </if>
+        </where>
         ORDER BY time DESC
         LIMIT 50
     </select>

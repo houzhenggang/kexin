@@ -137,9 +137,14 @@
     </update>
 
 
-    <select id="getAllStaypoints" resultType="com.tongji.kexin_ca.entity.StayPoints">
+    <select id="getAllStayPoints" resultType="com.tongji.kexin_ca.entity.StayPoints">
         SELECT *
         FROM stay_points
+        <where>
+            <if test="userId != -1">
+                user_id = #{userId}
+            </if>
+        </where>
         ORDER BY end_time DESC
         LIMIT 50
     </select>

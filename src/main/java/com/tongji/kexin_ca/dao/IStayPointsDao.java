@@ -21,6 +21,6 @@ public interface IStayPointsDao {
 
     int updateByPrimaryKey(StayPoints record);
 
-    List<StayPoints> getAllStaypoints();
+    List<StayPoints> getAllStayPoints(@Param("userId") int userId);
 
 }

@@ -50,24 +50,27 @@ public class LocationController {
     }
 
     @RequestMapping(value = "/display/monitor")
-    public String userLocationMonitor(ModelMap model) {
-        final List<Location> locationList = locationService.getAllLocations();
+    public String userLocationMonitor(int userId, ModelMap model) {
+
+        final List<Location> locationList = locationService.getAllLocations(userId);
         model.addAttribute("locationList", locationList);
 
-        final List<StayPoints> StaypointsList = stayPointService.getAllStaypoints();
-
+        final List<StayPoints> StaypointsList = stayPointService.getAllStayPoints(userId);
         model.addAttribute("stayPointList", StaypointsList);
 
         model.addAttribute("dateTool", new DateTool());
+
+        model.addAttribute("userId", userId);
+
         return "monitor/UserLocationMonitor";
     }
 
     @RequestMapping(value = "/display/newUploadedLocation")
     @ResponseBody
-    public List<Location> getNewUploadedLocation(String stringStartTime) {
+    public List<Location> getNewUploadedLocation(int userId, String stringStartTime) {
         final Timestamp startTime = Timestamp.valueOf(stringStartTime);
         System.out.println("startTime: " + startTime);
-        final List<Location> newUploadedLocationList = locationService.getNewUploadedLocation(startTime);
+        final List<Location> newUploadedLocationList = locationService.getNewUploadedLocation(userId, startTime);
         System.out.println(newUploadedLocationList);
         return newUploadedLocationList;
 

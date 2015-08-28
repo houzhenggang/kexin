@@ -102,8 +102,8 @@ public class StayPointService {
 
     }
 
-    public List<StayPoints> getAllStaypoints() {
-        return stayPointDao.getAllStaypoints();
+    public List<StayPoints> getAllStayPoints(int userId) {
+        return stayPointDao.getAllStayPoints(userId);
     }
 
 }
