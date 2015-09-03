@@ -76,6 +76,18 @@ public class LocationController {
 
     }
 
+    @RequestMapping(value = "/display/map_monitor")
+    public String userLocationMapMonitor(int userId, ModelMap model) {
+        final List<Location> locationList = locationService.getAllLocations(userId);
+        model.addAttribute("locationList", locationList);
+
+        model.addAttribute("dateTool", new DateTool());
+
+        model.addAttribute("userId", userId);
+
+        return "monitor/UserLocationMapMonitor";
+    }
+
     public LocationService getLocationService() {
         return locationService;
     }

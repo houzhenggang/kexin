@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>单用户的地理位置监控显示器</title>
+
+    <link href="/kexin/resources/css/reset.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="/kexin/resources/css/layout.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script src="/kexin/resources/js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/kexin/resources/js/DateFormater.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=AxQRwv9tsTVGBrsPtjEX0HIb"></script>
+</head>
+
+<body>
+<div id="container">
+    <div id="body">
+        <div class="z-box" style="margin-top:60px;">
+            <div class="z-box-title">
+                <span class="z-desc">可信平台交易全国分布图</span><span class="z-subdesc"></span>
+            </div>
+            <div class="z-box-content">
+                <div id="chinaMap" style="height: 500px; margin: 0 auto;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    // 百度地图API功能
+    var bmap = new BMap.Map("chinaMap");    // 创建Map实例
+    bmap.centerAndZoom(new BMap.Point($locationList[0].longitude, $locationList[0].latitude), 16);  // 初始化地图,设置中心点坐标和地图级别
+    bmap.setCurrentCity("上海");          // 设置地图显示的城市 此项是必须设置的
+    bmap.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+        #if($locationList.size() == 0)
+        var maxTime = '1990-01-01 00:00:00.0'
+        #else
+        var maxTime = '$locationList[0].time';
+        #end
+
+    var markerList = new Array();
+        #foreach($Location in $locationList)
+        markerList.unshift(new BMap.Marker(new BMap.Point($Location.longitude, $Location.latitude)));
+        ##        bmap.addOverlay(new BMap.Marker(new BMap.Point($Location.longitude, $Location.latitude)));
+        #end
+    bmap.addOverlay(markerList[1]);
+    for (var i = 0; i < markerList.length; i++) {
+        bmap.addOverlay(markerList[i]);
+    }
+
+    setInterval(function () {
+        $.ajax({
+            type: 'POST',
+            url: 'newUploadedLocation',
+            dataType: 'json',
+            data: {stringStartTime: maxTime, userId:$userId},
+            success: function (data) {
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    data[i].time = new Date(data[i].time).format("yyyy-MM-dd hh:mm:ss.S");
+                    var mar = new BMap.Marker(new BMap.Point(data[i].longitude, data[i].latitude));
+                    markerList.push(mar);
+                    bmap.addOverlay(mar)
+                    if (markerList.length > 50) {
+                        var tmp = markerList.shift();
+                        bmap.removeOverlay(tmp);
+                    }
+
+                }
+                if (data.length != 0) {
+                    maxTime = data[0].time;
+                }
+            }
+        });
+    }, 2000);
+</script>
+</html>

@@ -20,5 +20,7 @@
 <a href="ub/display/monitor?userId=1" style="display:block;height: 30px; padding: 10px;">单用户的浏览行为监控显示器</a> <br/>
 <a href="location/display/monitor?userId=-1" style="display:block;height: 30px; padding: 10px;">全部用户的地理位置监控显示器</a> <br/>
 <a href="location/display/monitor?userId=4" style="display:block;height: 30px; padding: 10px;">单用户的地理位置监控显示器</a> <br/>
+<a href="location/display/map_monitor?userId=4" style="display:block;height: 30px; padding: 10px;">用户地理位置地图监控显示器</a>
+<br/>
 </body>
 </html>
