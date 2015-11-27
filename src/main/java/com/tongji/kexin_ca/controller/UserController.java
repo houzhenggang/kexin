@@ -29,10 +29,8 @@ public class UserController {
     public String loginHTML(ModelMap model, String user_name, String password, HttpServletResponse response) {
 
         if (handleLogin(model, user_name, password, response)) {
-            if (user_name.equalsIgnoreCase(adminName)) {
-                return "redirect:/monitor";
-            }
-            return "User/LoginSuccess";
+
+            return "redirect:/monitor";
         }
         return "User/Login";
 

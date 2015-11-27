@@ -43,8 +43,8 @@
             setInterval(function () {
                 $.ajax({
                     type: 'POST',
-                    url: 'newUbResult',
                     dataType: 'json',
+                    url: 'newUbResult',
                     data: {stringStartTime: maxTime, userId:$userId},
                     success: function (data) {
                         var i;

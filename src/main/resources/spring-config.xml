@@ -84,7 +84,7 @@
 
     <bean id="tokenDeleteTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="tokenDeleteScheduledJobDetail"/>
-        <property name="cronExpression" value="0 */1 * * * ?"/>
+        <property name="cronExpression" value="0 0/20 * * * ?"/>
     </bean>
 
     <!-- Scheduler factory bean to glue together jobDetails and triggers to Configure Quartz Scheduler -->
